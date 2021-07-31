@@ -1,0 +1,17 @@
+{
+  "name": "openfaas-function",
+  "version": "1.0.0",
+  "description": "OpenFaaS Function",
+  "main": "handler.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "tsc --build tsconfig.json",
+    "postinstall": "echo \"Do nothing\""
+  },
+  "devDependencies": {
+    "typescript":"^4.3.5"
+  },
+  "keywords": [],
+  "author": "rafaelpernil2",
+  "license": "MIT"
+}
