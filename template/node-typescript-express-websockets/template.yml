@@ -1,5 +1,0 @@
-language: node-typescript-express-websockets
-fprocess: node ./dist/index.js
-welcome_message: |
-  You have created a new Typescript function which uses GraphQL over HTTPS and WebSockets
-

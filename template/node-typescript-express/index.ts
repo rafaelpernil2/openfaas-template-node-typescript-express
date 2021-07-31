@@ -1,15 +1,16 @@
 import express from "express";
-import ws from "ws";
-import cors from "cors";
-
+import { Request, Response, NextFunction, } from "express-serve-static-core";
 const bodyParser = require("body-parser");
-const handle = require("./function/handler");
-import { Request, Response, NextFunction } from "express-serve-static-core";
+import {
+  handle,
+  onExpressServerCreated,
+  onExpressServerListen
+} from "./function/handler";
 
 const app = express();
-app.use(cors());
-// TODO: Add handler method for GraphQL initialization
-// expressServer.use(graphqlHTTP({ schema, graphiql: true }));
+
+// Express server created. Do any initialization required in the handler
+onExpressServerCreated(app);
 
 const defaultMaxSize = "100kb"; // body-parser default
 
@@ -147,24 +148,5 @@ app.put("/*", middleware);
 app.delete("/*", middleware);
 app.options("/*", middleware);
 
-// TODO: Add in handler
-// const wssPath = "/subscriptions";
-
-// HTTPS / WSS
 const port = process.env.http_port || 3000;
-const server = app.listen(port, () => {
-  console.log(
-    `Express server running using ${
-      Boolean(false) ? "HTTPS" : "HTTP"
-    } on port ${port}`
-  );
-
-  // const wsServer = new ws.Server({ server, path: wssPath });
-  // TODO: Add handler method for GraphQL initialization
-  // useServer({ schema, execute, subscribe }, wsServer);
-  console.log(
-    `WebSockets server running ${
-      Boolean(false) ? "using SSL" : "without SSL"
-    } on port ${port}`
-  );
-});
+const server = app.listen(port, () => onExpressServerListen(server));
