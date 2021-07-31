@@ -2,30 +2,13 @@ import express from "express";
 import ws from "ws";
 import cors from "cors";
 
-// import {  } from "express;
-
 const bodyParser = require("body-parser");
 const handle = require("./function/handler");
 import { Request, Response, NextFunction } from "express-serve-static-core";
 
-// require('dotenv').config();
-
-// const {
-//     MONGO_DB_ENDPOINT,
-//     IS_HTTPS,
-//     SSL_CRT_FILE,
-//     SSL_KEY_FILE,
-//     HTTPS_PORT
-// } = EnvLoader.getInstance().loadedVariables;
-
-// MONGODB Connection
-// mongoose.connect(MONGO_DB_ENDPOINT, { useNewUrlParser: true, useUnifiedTopology: true });
-// !mongoose.connection ? console.log("Error connecting to MongoDB") : console.log("MongoDB connected successfully");
-
-// EXPRESS and GraphQL HTTP initialization
-
 const app = express();
 app.use(cors());
+// TODO: Add handler method for GraphQL initialization
 // expressServer.use(graphqlHTTP({ schema, graphiql: true }));
 
 const defaultMaxSize = "100kb"; // body-parser default
@@ -155,7 +138,6 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
     .catch((e) => {
       cb(e);
     });
-  console.log("Hace algo!");
 };
 
 app.post("/*", middleware);
@@ -165,18 +147,20 @@ app.put("/*", middleware);
 app.delete("/*", middleware);
 app.options("/*", middleware);
 
-const wssPath = "/subscriptions";
+// TODO: Add in handler
+// const wssPath = "/subscriptions";
 
 // HTTPS / WSS
 const port = process.env.http_port || 3000;
 const server = app.listen(port, () => {
   console.log(
-    `GraphQL server running using ${
+    `Express server running using ${
       Boolean(false) ? "HTTPS" : "HTTP"
     } on port ${port}`
   );
 
   const wsServer = new ws.Server({ server, path: wssPath });
+  // TODO: Add handler method for GraphQL initialization
   // useServer({ schema, execute, subscribe }, wsServer);
   console.log(
     `WebSockets server running ${
