@@ -165,6 +165,6 @@ const server = app.listen(port, () => {
   console.log(
     `WebSockets server running ${
       Boolean(false) ? "using SSL" : "without SSL"
-    } on port ${port} at ${wssPath}`
+    } on port ${port}`
   );
 });
