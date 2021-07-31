@@ -159,7 +159,7 @@ const server = app.listen(port, () => {
     } on port ${port}`
   );
 
-  const wsServer = new ws.Server({ server, path: wssPath });
+  // const wsServer = new ws.Server({ server, path: wssPath });
   // TODO: Add handler method for GraphQL initialization
   // useServer({ schema, execute, subscribe }, wsServer);
   console.log(
