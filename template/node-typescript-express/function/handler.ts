@@ -13,7 +13,7 @@ async function handle(event: any, context: any, cb: any) {
 
 function onExpressServerCreated(expressServer: core.Express): PathParams {
   // Add your code
-  console.log("onExpressServerUse", expressServer);
+  console.log("onExpressServerCreated", expressServer);
   return "";
 }
 

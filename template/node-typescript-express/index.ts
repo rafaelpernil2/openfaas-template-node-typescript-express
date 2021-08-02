@@ -1,11 +1,8 @@
 import express from "express";
-import { Request, Response, NextFunction, } from "express-serve-static-core";
+import { Request, Response, NextFunction } from "express-serve-static-core";
 const bodyParser = require("body-parser");
-import {
-  handle,
-  onExpressServerCreated,
-  onExpressServerListen
-} from "./function/handler";
+// @ts-ignore
+import { handle, onExpressServerCreated, onExpressServerListen } from "./function/handler";
 
 const app = express();
 
@@ -129,7 +126,6 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
 
   const fnEvent = getFunctionEvent(req);
   const fnContext = new FunctionContext(cb);
-
   Promise.resolve(handle(fnEvent, fnContext, cb))
     .then((res) => {
       if (!fnContext.cbCalled) {

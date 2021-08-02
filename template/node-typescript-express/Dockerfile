@@ -22,24 +22,27 @@ RUN mkdir -p /home/app/function
 # Wrapper/boot-strapper
 WORKDIR /home/app
 COPY package.json ./
+COPY tsconfig.json ./
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN npm i
 
 # Copy outer function handler
 COPY index.ts ./
-COPY *.json ./
-COPY function/handler.ts ./function
-# COPY function files and folders
-WORKDIR /home/app/function
-
-WORKDIR /home/app
 RUN npm run build
-# RUN rm ./dist/function/handler.js
+
+
+WORKDIR /home/app/function
+COPY function/*.json ../dist/
+WORKDIR /home/app/dist
+RUN npm i
+
+
 
 # COPY function node packages and install, adding this as a separate
 # entry allows caching of npm install
 
+# COPY function files and folders
 WORKDIR /home/app/function
 COPY function/ ./
 COPY function/*.json ./
