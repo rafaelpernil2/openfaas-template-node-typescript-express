@@ -35,7 +35,7 @@ RUN npm run build
 WORKDIR /home/app/function
 COPY function/*.json ../dist/
 WORKDIR /home/app/dist
-RUN npm i
+RUN npm i --production
 
 
 

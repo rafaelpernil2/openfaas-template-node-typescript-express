@@ -1,7 +1,6 @@
 import https from "https";
 import * as http from "http";
 import * as core from 'express-serve-static-core';
-import { PathParams } from "express-serve-static-core";
 
 async function handle(event: any, context: any, cb: any) {
   const result = {
@@ -11,10 +10,9 @@ async function handle(event: any, context: any, cb: any) {
   return context.status(200).succeed(result);
 }
 
-function onExpressServerCreated(expressServer: core.Express): PathParams {
+function onExpressServerCreated(expressServer: core.Express) {
   // Add your code
   console.log("onExpressServerCreated", expressServer);
-  return "";
 }
 
 async function onExpressServerListen(server: https.Server | http.Server) {

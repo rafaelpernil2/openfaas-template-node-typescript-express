@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express-serve-static-core";
 const bodyParser = require("body-parser");
 // @ts-ignore
 import { handle, onExpressServerCreated, onExpressServerListen } from "./function/handler";
+require('dotenv').config({ path:"./function/.env" });
 
 const app = express();
 
