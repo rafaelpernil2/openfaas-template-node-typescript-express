@@ -16,8 +16,8 @@ ENV NPM_CONFIG_LOGLEVEL warn
 RUN chmod 777 /tmp
 
 # Install pnpm to increase package installation speed
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-USER node
+ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
+USER app
 RUN npm i -g pnpm
 
 USER app
