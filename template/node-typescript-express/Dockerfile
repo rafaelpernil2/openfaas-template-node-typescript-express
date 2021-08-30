@@ -12,8 +12,6 @@ RUN apk --no-cache add curl ca-certificates \
 
 # Turn down the verbosity to default level.
 ENV NPM_CONFIG_LOGLEVEL warn
-RUN echo "user=app" > "${NPM_CONFIG_PREFIX}/etc/.npmrc"
-ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
 
 RUN chmod 777 /tmp
 
@@ -27,7 +25,7 @@ COPY package.json ./
 COPY tsconfig.json ./
 
 # Install pnpm to increase package installation speed
-RUN npm i -g pnpm
+RUN npm i -g --unsafe-perm pnpm
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN pnpm i
