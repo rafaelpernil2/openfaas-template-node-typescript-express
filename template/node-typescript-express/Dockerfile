@@ -29,7 +29,8 @@ WORKDIR /home/app
 COPY package.json ./
 COPY tsconfig.json ./
 
-ENV PATH="${PATH}:/usr/local/lib/node_modules/pnpm/node_modules/.bin"
+# ENV PATH="${PATH}:/usr/local/lib/node_modules/pnpm/node_modules/.bin"
+ENV PATH="=/home/app/.npm-global/bin:${PATH}"
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN pnpm i
