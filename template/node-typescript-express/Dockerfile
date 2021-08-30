@@ -29,32 +29,32 @@ COPY tsconfig.json ./
 RUN npm i -g pnpm
 
 # This ordering means the npm installation is cached for the outer function handler.
-RUN npm i
+RUN pnpm i
 
 # Copy outer function handler
 COPY index.ts ./
-RUN npm run build
+RUN pnpm run build
 
 
 WORKDIR /home/app/function
 COPY function/*.json ../dist/
 WORKDIR /home/app/dist
-RUN npm i --production
+RUN pnpm i --production
 
 
 
 # COPY function node packages and install, adding this as a separate
-# entry allows caching of npm install
+# entry allows caching of pnpm install
 
 # COPY function files and folders
 WORKDIR /home/app/function
 COPY function/ ./
 COPY function/*.json ./
 
-RUN npm i
-RUN npm run build
+RUN pnpm i
+RUN pnpm run build
 # Run any tests that may be available
-RUN npm test
+RUN pnpm test
 
 # Set correct permissions to use non root user
 WORKDIR /home/app/
