@@ -20,7 +20,7 @@ ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
 USER app
 RUN npm i -g pnpm
 
-USER app
+# USER app
 
 RUN mkdir -p /home/app/function
 
