@@ -12,7 +12,11 @@ RUN apk --no-cache add curl ca-certificates \
 
 # Turn down the verbosity to default level.
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
+
+# Install pnpm to increase package installation speed
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+USER node
+RUN npm i -g pnpm
 
 RUN chmod 777 /tmp
 
@@ -25,8 +29,7 @@ WORKDIR /home/app
 COPY package.json ./
 COPY tsconfig.json ./
 
-# Install pnpm to increase package installation speed
-RUN npm i -g pnpm
+
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN pnpm i
