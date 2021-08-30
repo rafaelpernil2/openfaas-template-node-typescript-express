@@ -13,7 +13,7 @@ RUN apk --no-cache add curl ca-certificates \
 # Turn down the verbosity to default level.
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
-ENV PATH="=/home/app/.npm-global/bin:${PATH}"
+
 
 RUN chmod 777 /tmp
 
@@ -29,7 +29,7 @@ WORKDIR /home/app
 COPY package.json ./
 COPY tsconfig.json ./
 
-
+ENV PATH="${PATH}:/usr/local/lib/node_modules/pnpm/node_modules/.bin"
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN pnpm i
