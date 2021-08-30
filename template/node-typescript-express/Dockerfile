@@ -12,6 +12,7 @@ RUN apk --no-cache add curl ca-certificates \
 
 # Turn down the verbosity to default level.
 ENV NPM_CONFIG_LOGLEVEL warn
+RUN echo "user=app" > "${NPM_CONFIG_PREFIX}/etc/.npmrc"
 ENV NPM_CONFIG_PREFIX=/home/app/.npm-global
 
 RUN chmod 777 /tmp
