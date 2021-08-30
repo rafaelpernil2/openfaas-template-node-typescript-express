@@ -24,36 +24,33 @@ WORKDIR /home/app
 COPY package.json ./
 COPY tsconfig.json ./
 
-# Install pnpm to increase package installation speed
-RUN curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm
-
 # This ordering means the npm installation is cached for the outer function handler.
-RUN pnpm i
+RUN npm i
 
 # Copy outer function handler
 COPY index.ts ./
-RUN pnpm run build
+RUN npm run build
 
 
 WORKDIR /home/app/function
 COPY function/*.json ../dist/
 WORKDIR /home/app/dist
-RUN pnpm i --production
+RUN npm i --production
 
 
 
 # COPY function node packages and install, adding this as a separate
-# entry allows caching of pnpm install
+# entry allows caching of npm install
 
 # COPY function files and folders
 WORKDIR /home/app/function
 COPY function/ ./
 COPY function/*.json ./
 
-RUN pnpm i
-RUN pnpm run build
+RUN npm i
+RUN npm run build
 # Run any tests that may be available
-RUN pnpm test
+RUN npm test
 
 # Set correct permissions to use non root user
 WORKDIR /home/app/
