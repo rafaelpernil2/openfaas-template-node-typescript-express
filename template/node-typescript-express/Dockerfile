@@ -25,6 +25,7 @@ COPY package.json ./
 COPY tsconfig.json ./
 
 # Install pnpm to increase package installation speed
+RUN npm -g config set user root
 RUN npm i -g pnpm
 
 # This ordering means the npm installation is cached for the outer function handler.
