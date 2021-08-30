@@ -13,12 +13,12 @@ RUN apk --no-cache add curl ca-certificates \
 # Turn down the verbosity to default level.
 ENV NPM_CONFIG_LOGLEVEL warn
 
+RUN chmod 777 /tmp
+
 # Install pnpm to increase package installation speed
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 USER node
 RUN npm i -g pnpm
-
-RUN chmod 777 /tmp
 
 USER app
 
