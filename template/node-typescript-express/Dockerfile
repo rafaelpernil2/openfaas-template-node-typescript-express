@@ -33,6 +33,13 @@ COPY --chown=app:app index.ts ./
 RUN npm run build
 
 
+WORKDIR /home/app/function
+COPY --chown=app:app function/*.json ../dist/
+WORKDIR /home/app/dist
+RUN npm i
+
+
+
 # COPY function node packages and install, adding this as a separate
 # entry allows caching of npm install
 
