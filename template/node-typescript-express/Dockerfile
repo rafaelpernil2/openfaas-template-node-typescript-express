@@ -21,19 +21,20 @@ RUN mkdir -p /home/app/function
 
 # Wrapper/boot-strapper
 WORKDIR /home/app
-COPY package.json ./
-COPY tsconfig.json ./
+COPY --chown=app:app package*.json .
+COPY --chown=app:app package.json ./
+COPY --chown=app:app tsconfig.json ./
 
 # This ordering means the npm installation is cached for the outer function handler.
 RUN npm i
 
 # Copy outer function handler
-COPY index.ts ./
+COPY --chown=app:app index.ts ./
 RUN npm run build
 
 
 WORKDIR /home/app/function
-COPY function/*.json ../dist/
+COPY --chown=app:app function/*.json ../dist/
 WORKDIR /home/app/dist
 RUN npm i
 
@@ -44,8 +45,8 @@ RUN npm i
 
 # COPY function files and folders
 WORKDIR /home/app/function
-COPY function/ ./
-COPY function/*.json ./
+COPY --chown=app:app function/ ./
+COPY --chown=app:app function/*.json ./
 
 RUN npm i
 RUN npm run build
