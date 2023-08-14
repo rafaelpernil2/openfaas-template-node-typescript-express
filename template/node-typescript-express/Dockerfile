@@ -1,5 +1,5 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/of-watchdog:0.8.4 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} node:14-alpine as ship
+FROM --platform=${TARGETPLATFORM:-linux/amd64} node:18-alpine as ship
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -35,7 +35,7 @@ RUN npm run build
 WORKDIR /home/app/function
 COPY function/*.json ../dist/
 WORKDIR /home/app/dist
-RUN npm i --production
+RUN npm i
 
 
 
