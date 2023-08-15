@@ -36,7 +36,7 @@ RUN npm run build
 WORKDIR /home/app/function
 COPY --chown=app:app function/*.json ../dist/
 WORKDIR /home/app/dist
-RUN npm i --production
+RUN npm i --omit=dev
 
 
 
